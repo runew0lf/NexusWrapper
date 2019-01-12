@@ -1,13 +1,14 @@
-import requests
-import websockets
-import webbrowser
 import asyncio
-import uuid
+import hashlib
 import json
 import time
-import hashlib
-from clint.textui import progress
+import uuid
+import webbrowser
 from pprint import pprint as print
+
+import requests
+import websockets
+from clint.textui import progress
 
 
 class Nexus():
