@@ -79,8 +79,9 @@ class Nexus():
         mod_id = mod_id.replace("/", "")
         return self.request_data(f"games/{game}/mods/{mod_id}")
 
-    def download_file(self, file_id, fname):
-        r = requests.get(file_id, stream=True)
+    def download_file(self, uri, fname):
+        time.sleep(1)  # limit to 1 request per second
+        r = self.session.request('GET', uri, stream=True)
         with open(fname, 'wb') as f:
             total_length = int(r.headers.get('content-length'))
             for chunk in progress.bar(r.iter_content(chunk_size=1024), expected_size=(total_length / 1024) + 1):
@@ -93,4 +94,3 @@ class Nexus():
         time.sleep(1)  # limit to 1 request per second
         r = self.session.request('GET', URL, timeout=30)
         return r.json()
-
