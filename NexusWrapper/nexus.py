@@ -74,10 +74,10 @@ class Nexus():
 
     def mod_by_url(self, url):
         url = url.split('?', 1)[0]
-        game = url.split("/")[3]
-        mod_id = url.split(f"/{game}/mods/", 1)[1]
+        game_name = url.split("/")[3]
+        mod_id = url.split(f"/{game_name}/mods/", 1)[1]
         mod_id = mod_id.replace("/", "")
-        return self.request_data(f"games/{game}/mods/{mod_id}")
+        return self.mod(game_name, mod_id)
 
     def download_file(self, uri, fname):
         time.sleep(1)  # limit to 1 request per second
