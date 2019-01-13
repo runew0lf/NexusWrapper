@@ -52,7 +52,7 @@ class Nexus():
 
     def mod(self, game_name, mod_id):
         return self.request_data(f"games/{game_name}/mods/{mod_id}")
-    
+
     def file_list(self, game_name, mod_id):
         return self.request_data(f"games/{game_name}/mods/{mod_id}/files")
 
@@ -78,7 +78,7 @@ class Nexus():
         mod_id = url.split(f"/{game}/mods/", 1)[1]
         mod_id = mod_id.replace("/", "")
         return self.request_data(f"games/{game}/mods/{mod_id}")
-      
+
     def download_file(self, file_id, fname):
         r = requests.get(file_id, stream=True)
         with open(fname, 'wb') as f:
@@ -87,3 +87,10 @@ class Nexus():
                 if chunk:
                     f.write(chunk)
                     f.flush()
+
+    def search(self, search_term, game_id=None):
+        URL = f"https://search.nexusmods.com/mods?terms={search_term}&game_id={game_id}".replace(" ", ",")
+        time.sleep(1)  # limit to 1 request per second
+        r = self.session.request('GET', URL, timeout=30)
+        return r.json()
+
