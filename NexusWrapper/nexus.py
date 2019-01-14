@@ -4,6 +4,7 @@ import json
 import time
 import uuid
 import webbrowser
+import feedparser
 from pprint import pprint as print
 
 import requests
@@ -94,3 +95,11 @@ class Nexus():
         time.sleep(1)  # limit to 1 request per second
         r = self.session.request('GET', URL, timeout=30)
         return r.json()
+
+    def new_files(self, game_name=None):
+        return feedparser.parse(f"https://www.nexusmods.com/{game_name}/rss/newtoday")
+        pass
+    
+    def updated_files(self, game_name=None):
+        return feedparser.parse(f"https://www.nexusmods.com/{game_name}/rss/updatedtoday")        
+        pass
