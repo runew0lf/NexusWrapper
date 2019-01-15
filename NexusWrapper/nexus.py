@@ -98,8 +98,6 @@ class Nexus():
 
     def new_files(self, game_name=None):
         return feedparser.parse(f"https://www.nexusmods.com/{game_name}/rss/newtoday")
-        pass
-    
+
     def updated_files(self, game_name=None):
         return feedparser.parse(f"https://www.nexusmods.com/{game_name}/rss/updatedtoday")        
-        pass
