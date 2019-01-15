@@ -4,9 +4,8 @@ import json
 import time
 import uuid
 import webbrowser
-import feedparser
-from pprint import pprint as print
 
+import feedparser
 import requests
 import websockets
 from clint.textui import progress
